@@ -1,0 +1,1298 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VERKAN | ورکان</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Tahoma, Arial, sans-serif;
+    }
+
+    :root {
+      --bg: #0b0b0b;
+      --card: #151515;
+      --card2: #1d1d1d;
+      --text: #ffffff;
+      --muted: #aaa;
+      --gold: #d7a84b;
+      --gold2: #f1c96a;
+      --border: #2d2d2d;
+      --danger: #e74c3c;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    button,
+    input {
+      font: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    /* HEADER */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(11, 11, 11, 0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav {
+      max-width: 1200px;
+      margin: auto;
+      min-height: 72px;
+      padding: 12px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .logo {
+      font-size: 27px;
+      font-weight: 900;
+      letter-spacing: 3px;
+      color: var(--gold);
+    }
+
+    .logo span {
+      color: white;
+    }
+
+    nav {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    nav button {
+      background: transparent;
+      border: 0;
+      color: #ddd;
+      padding: 10px 14px;
+      border-radius: 10px;
+    }
+
+    nav button:hover {
+      background: var(--card2);
+      color: var(--gold2);
+    }
+
+    .cart-btn {
+      background: var(--gold);
+      color: #111;
+      border: 0;
+      border-radius: 12px;
+      padding: 10px 16px;
+      font-weight: bold;
+    }
+
+    .cart-btn:hover {
+      background: var(--gold2);
+    }
+
+    /* HERO */
+    .hero {
+      min-height: 470px;
+      display: flex;
+      align-items: center;
+      background:
+        linear-gradient(90deg, rgba(0,0,0,.96), rgba(0,0,0,.7)),
+        radial-gradient(circle at 80% 30%, #4d3a18, transparent 40%);
+    }
+
+    .hero-content {
+      width: 1200px;
+      max-width: 100%;
+      margin: auto;
+      padding: 70px 20px;
+    }
+
+    .badge {
+      display: inline-block;
+      color: var(--gold2);
+      border: 1px solid #6f5425;
+      padding: 7px 14px;
+      border-radius: 999px;
+      margin-bottom: 20px;
+      font-size: 13px;
+    }
+
+    .hero h1 {
+      font-size: clamp(42px, 7vw, 78px);
+      line-height: 1;
+      margin-bottom: 20px;
+    }
+
+    .hero h1 span {
+      color: var(--gold);
+    }
+
+    .hero p {
+      max-width: 600px;
+      color: #c8c8c8;
+      line-height: 2;
+      font-size: 17px;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 30px;
+    }
+
+    .primary,
+    .secondary {
+      border-radius: 12px;
+      padding: 13px 22px;
+      border: 0;
+      font-weight: bold;
+    }
+
+    .primary {
+      background: var(--gold);
+      color: #111;
+    }
+
+    .secondary {
+      background: transparent;
+      border: 1px solid #555;
+      color: white;
+    }
+
+    /* GENERAL */
+    .container {
+      max-width: 1200px;
+      margin: auto;
+      padding: 65px 20px;
+    }
+
+    .section-title {
+      margin-bottom: 28px;
+    }
+
+    .section-title h2 {
+      font-size: 32px;
+      margin-bottom: 8px;
+    }
+
+    .section-title p {
+      color: var(--muted);
+    }
+
+    /* SEARCH */
+    .toolbar {
+      display: flex;
+      justify-content: space-between;
+      gap: 15px;
+      flex-wrap: wrap;
+      margin-bottom: 30px;
+    }
+
+    .search {
+      flex: 1;
+      min-width: 220px;
+      position: relative;
+    }
+
+    .search input {
+      width: 100%;
+      background: var(--card);
+      border: 1px solid var(--border);
+      color: white;
+      padding: 14px 18px;
+      border-radius: 12px;
+      outline: none;
+    }
+
+    .search input:focus {
+      border-color: var(--gold);
+    }
+
+    /* PRODUCTS */
+    .products {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .product {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      overflow: hidden;
+      transition: .25s;
+    }
+
+    .product:hover {
+      transform: translateY(-5px);
+      border-color: #705522;
+    }
+
+    .product-image {
+      height: 220px;
+      background:
+        linear-gradient(135deg, #292929, #111);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #777;
+      overflow: hidden;
+    }
+
+    .product-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .stone-icon {
+      font-size: 65px;
+    }
+
+    .product-info {
+      padding: 20px;
+    }
+
+    .product-info h3 {
+      font-size: 20px;
+      margin-bottom: 9px;
+    }
+
+    .product-info p {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.8;
+      min-height: 50px;
+    }
+
+    .product-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 20px;
+      gap: 10px;
+    }
+
+    .price {
+      color: var(--gold2);
+      font-weight: bold;
+    }
+
+    .add-btn {
+      background: var(--gold);
+      border: 0;
+      color: #111;
+      padding: 9px 13px;
+      border-radius: 9px;
+      font-weight: bold;
+    }
+
+    /* FEATURES */
+    .features {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .feature {
+      padding: 25px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+    }
+
+    .feature-icon {
+      font-size: 32px;
+      margin-bottom: 12px;
+    }
+
+    .feature h3 {
+      margin-bottom: 8px;
+    }
+
+    .feature p {
+      color: var(--muted);
+      line-height: 1.8;
+      font-size: 14px;
+    }
+
+    /* CONTACT */
+    .contact-box {
+      background: linear-gradient(135deg, #19150d, #111);
+      border: 1px solid #493a20;
+      border-radius: 20px;
+      padding: 35px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 30px;
+    }
+
+    .contact-box h2 {
+      color: var(--gold2);
+      margin-bottom: 15px;
+    }
+
+    .contact-box p {
+      color: #bbb;
+      line-height: 2;
+    }
+
+    .contact-info {
+      display: grid;
+      gap: 12px;
+    }
+
+    .contact-item {
+      background: rgba(255,255,255,.04);
+      padding: 15px;
+      border-radius: 10px;
+    }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid var(--border);
+      color: #777;
+      text-align: center;
+      padding: 30px 20px;
+    }
+
+    footer strong {
+      color: var(--gold);
+    }
+
+    /* MODAL */
+    .modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 1000;
+      background: rgba(0,0,0,.75);
+      padding: 20px;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal.active {
+      display: flex;
+    }
+
+    .modal-box {
+      width: 100%;
+      max-width: 520px;
+      max-height: 90vh;
+      overflow-y: auto;
+      background: #151515;
+      border: 1px solid #333;
+      border-radius: 20px;
+      padding: 25px;
+    }
+
+    .modal-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .close {
+      border: 0;
+      background: #252525;
+      color: white;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      font-size: 20px;
+    }
+
+    .cart-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 15px;
+      padding: 14px 0;
+      border-bottom: 1px solid #292929;
+    }
+
+    .remove {
+      background: transparent;
+      border: 0;
+      color: #ff6b5e;
+    }
+
+    .total {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 20px;
+      font-size: 19px;
+      font-weight: bold;
+    }
+
+    /* ADMIN */
+    .admin-form {
+      display: grid;
+      gap: 13px;
+    }
+
+    .admin-form input,
+    .admin-form textarea {
+      width: 100%;
+      padding: 13px;
+      border: 1px solid #333;
+      border-radius: 10px;
+      background: #0d0d0d;
+      color: white;
+      outline: none;
+    }
+
+    .admin-form textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+
+    .empty {
+      text-align: center;
+      color: #777;
+      padding: 40px;
+      grid-column: 1/-1;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 850px) {
+      .products {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .features {
+        grid-template-columns: 1fr;
+      }
+
+      .contact-box {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .nav {
+        flex-wrap: wrap;
+      }
+
+      nav {
+        width: 100%;
+        justify-content: center;
+        order: 3;
+      }
+
+      .hero {
+        min-height: 420px;
+      }
+
+      .products {
+        grid-template-columns: 1fr;
+      }
+
+      .product-image {
+        height: 240px;
+      }
+
+      .hero-content {
+        padding-top: 50px;
+        padding-bottom: 50px;
+      }
+
+      .container {
+        padding-top: 45px;
+        padding-bottom: 45px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div class="nav">
+
+    <div class="logo">
+      VERKAN<span>.</span>
+    </div>
+
+    <nav>
+      <button onclick="scrollToSection('home')">خانه</button>
+      <button onclick="scrollToSection('products')">محصولات</button>
+      <button onclick="scrollToSection('about')">درباره ما</button>
+      <button onclick="scrollToSection('contact')">تماس</button>
+    </nav>
+
+    <button class="cart-btn" onclick="openCart()">
+      🛒 سبد خرید
+      <span id="cartCount">0</span>
+    </button>
+
+  </div>
+</header>
+
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-content">
+
+    <span class="badge">VERKAN STONE COLLECTION</span>
+
+    <h1>
+      زیبایی از جنس
+      <span>سنگ</span>
+    </h1>
+
+    <p>
+      مجموعه‌ای از سنگ‌های مصنوعی با طراحی مدرن،
+      کیفیت مناسب و ظاهر حرفه‌ای برای دکوراسیون داخلی
+      و پروژه‌های ساختمانی.
+    </p>
+
+    <div class="hero-buttons">
+      <button class="primary" onclick="scrollToSection('products')">
+        مشاهده محصولات
+      </button>
+
+      <button class="secondary" onclick="scrollToSection('contact')">
+        تماس با ورکان
+      </button>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- PRODUCTS -->
+<section class="container" id="products">
+
+  <div class="section-title">
+    <h2>محصولات VERKAN</h2>
+    <p>سنگ مصنوعی موردنظر خود را پیدا کنید.</p>
+  </div>
+
+  <div class="toolbar">
+
+    <div class="search">
+      <input
+        type="text"
+        id="searchInput"
+        placeholder="جستجوی محصول..."
+        oninput="searchProducts()"
+      >
+    </div>
+
+    <button class="primary" onclick="openAdmin()">
+      ➕ افزودن محصول
+    </button>
+
+  </div>
+
+  <div class="products" id="productsGrid"></div>
+
+</section>
+
+
+<!-- FEATURES -->
+<section class="container" id="about">
+
+  <div class="section-title">
+    <h2>چرا VERKAN؟</h2>
+    <p>تمرکز ما روی طراحی و کیفیت محصولات است.</p>
+  </div>
+
+  <div class="features">
+
+    <div class="feature">
+      <div class="feature-icon">🪨</div>
+      <h3>تنوع سنگ</h3>
+      <p>
+        مجموعه‌ای از مدل‌های مختلف سنگ مصنوعی
+        برای کاربردهای گوناگون.
+      </p>
+    </div>
+
+    <div class="feature">
+      <div class="feature-icon">✨</div>
+      <h3>طراحی مدرن</h3>
+      <p>
+        مدل‌هایی مناسب برای فضاهای مدرن،
+        مینیمال و دکوراسیون داخلی.
+      </p>
+    </div>
+
+    <div class="feature">
+      <div class="feature-icon">📦</div>
+      <h3>ثبت سفارش</h3>
+      <p>
+        محصولات موردنظر را به سبد خرید اضافه کنید
+        و سفارش خود را بررسی کنید.
+      </p>
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- CONTACT -->
+<section class="container" id="contact">
+
+  <div class="contact-box">
+
+    <div>
+      <h2>با VERKAN در تماس باشید</h2>
+
+      <p>
+        برای دریافت اطلاعات بیشتر درباره محصولات،
+        قیمت و سفارش می‌توانید با ما ارتباط برقرار کنید.
+      </p>
+    </div>
+
+    <div class="contact-info">
+
+      <div class="contact-item">
+        📞 تلفن: 09XX XXX XXXX
+      </div>
+
+      <div class="contact-item">
+        📧 ایمیل: info@verkan.ir
+      </div>
+
+      <div class="contact-item">
+        📍 آدرس: ایران
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<footer>
+  © 2026 <strong>VERKAN</strong> — تمامی حقوق محفوظ است.
+</footer>
+
+
+<!-- CART MODAL -->
+<div class="modal" id="cartModal">
+
+  <div class="modal-box">
+
+    <div class="modal-head">
+      <h2>🛒 سبد خرید</h2>
+      <button class="close" onclick="closeCart()">×</button>
+    </div>
+
+    <div id="cartItems"></div>
+
+    <div class="total">
+      <span>مجموع:</span>
+      <span id="cartTotal">۰ تومان</span>
+    </div>
+
+    <button
+      class="primary"
+      style="width:100%;margin-top:20px"
+      onclick="checkout()"
+    >
+      ثبت سفارش
+    </button>
+
+  </div>
+
+</div>
+
+
+<!-- ADMIN MODAL -->
+<div class="modal" id="adminModal">
+
+  <div class="modal-box">
+
+    <div class="modal-head">
+      <h2>➕ افزودن محصول</h2>
+      <button class="close" onclick="closeAdmin()">×</button>
+    </div>
+
+    <form class="admin-form" onsubmit="addProduct(event)">
+
+      <input
+        type="text"
+        id="productName"
+        placeholder="نام محصول"
+        required
+      >
+
+      <input
+        type="number"
+        id="productPrice"
+        placeholder="قیمت به تومان"
+        required
+      >
+
+      <input
+        type="text"
+        id="productImage"
+        placeholder="لینک عکس محصول (اختیاری)"
+      >
+
+      <textarea
+        id="productDescription"
+        placeholder="توضیحات محصول"
+        required
+      ></textarea>
+
+      <button class="primary" type="submit">
+        اضافه کردن محصول
+      </button>
+
+    </form>
+
+  </div>
+
+</div>
+
+
+<script>
+
+  /* ---------------------------
+     DEFAULT PRODUCTS
+  ---------------------------- */
+
+  let products = JSON.parse(
+    localStorage.getItem("verkan_products")
+  ) || [
+
+    {
+      id: 1,
+      name: "سنگ مصنوعی کلاسیک",
+      price: 850000,
+      image: "",
+      description: "مدل کلاسیک مناسب دیوار و دکوراسیون داخلی."
+    },
+
+    {
+      id: 2,
+      name: "سنگ مصنوعی مدرن",
+      price: 1250000,
+      image: "",
+      description: "طراحی مدرن برای فضاهای لوکس و مینیمال."
+    },
+
+    {
+      id: 3,
+      name: "سنگ دکوراتیو ورکان",
+      price: 990000,
+      image: "",
+      description: "سنگ دکوراتیو با ظاهر طبیعی و جذاب."
+    }
+
+  ];
+
+
+  let cart = JSON.parse(
+    localStorage.getItem("verkan_cart")
+  ) || [];
+
+
+  /* ---------------------------
+     FORMAT PRICE
+  ---------------------------- */
+
+  function formatPrice(price) {
+
+    return Number(price).toLocaleString("fa-IR") + " تومان";
+
+  }
+
+
+  /* ---------------------------
+     SAVE
+  ---------------------------- */
+
+  function saveProducts() {
+
+    localStorage.setItem(
+      "verkan_products",
+      JSON.stringify(products)
+    );
+
+  }
+
+
+  function saveCart() {
+
+    localStorage.setItem(
+      "verkan_cart",
+      JSON.stringify(cart)
+    );
+
+  }
+
+
+  /* ---------------------------
+     RENDER PRODUCTS
+  ---------------------------- */
+
+  function renderProducts(list = products) {
+
+    const grid = document.getElementById("productsGrid");
+
+    if (list.length === 0) {
+
+      grid.innerHTML = `
+        <div class="empty">
+          محصولی پیدا نشد.
+        </div>
+      `;
+
+      return;
+
+    }
+
+
+    grid.innerHTML = list.map(product => {
+
+      const imageHTML = product.image
+
+        ? `<img src="${escapeHTML(product.image)}"
+                alt="${escapeHTML(product.name)}">`
+
+        : `<div class="stone-icon">🪨</div>`;
+
+
+      return `
+
+        <article class="product">
+
+          <div class="product-image">
+            ${imageHTML}
+          </div>
+
+          <div class="product-info">
+
+            <h3>${escapeHTML(product.name)}</h3>
+
+            <p>
+              ${escapeHTML(product.description)}
+            </p>
+
+            <div class="product-bottom">
+
+              <span class="price">
+                ${formatPrice(product.price)}
+              </span>
+
+              <button
+                class="add-btn"
+                onclick="addToCart(${product.id})"
+              >
+                افزودن
+              </button>
+
+            </div>
+
+          </div>
+
+        </article>
+
+      `;
+
+    }).join("");
+
+  }
+
+
+  /* ---------------------------
+     SEARCH
+  ---------------------------- */
+
+  function searchProducts() {
+
+    const query =
+      document.getElementById("searchInput")
+      .value
+      .trim()
+      .toLowerCase();
+
+
+    const result = products.filter(product =>
+
+      product.name.toLowerCase().includes(query) ||
+
+      product.description.toLowerCase().includes(query)
+
+    );
+
+
+    renderProducts(result);
+
+  }
+
+
+  /* ---------------------------
+     ADD TO CART
+  ---------------------------- */
+
+  function addToCart(id) {
+
+    const product = products.find(
+      product => product.id === id
+    );
+
+    if (!product) return;
+
+
+    const existing = cart.find(
+      item => item.id === id
+    );
+
+
+    if (existing) {
+
+      existing.quantity++;
+
+    } else {
+
+      cart.push({
+        id: product.id,
+        quantity: 1
+      });
+
+    }
+
+
+    saveCart();
+
+    updateCartCount();
+
+    alert("محصول به سبد خرید اضافه شد ✅");
+
+  }
+
+
+  /* ---------------------------
+     CART
+  ---------------------------- */
+
+  function updateCartCount() {
+
+    const count = cart.reduce(
+      (sum, item) => sum + item.quantity,
+      0
+    );
+
+    document.getElementById("cartCount")
+      .textContent = count;
+
+  }
+
+
+  function openCart() {
+
+    renderCart();
+
+    document
+      .getElementById("cartModal")
+      .classList.add("active");
+
+  }
+
+
+  function closeCart() {
+
+    document
+      .getElementById("cartModal")
+      .classList.remove("active");
+
+  }
+
+
+  function renderCart() {
+
+    const container =
+      document.getElementById("cartItems");
+
+
+    if (cart.length === 0) {
+
+      container.innerHTML = `
+        <div class="empty">
+          سبد خرید خالی است.
+        </div>
+      `;
+
+      document.getElementById("cartTotal")
+        .textContent = "۰ تومان";
+
+      return;
+
+    }
+
+
+    let total = 0;
+
+
+    container.innerHTML = cart.map(item => {
+
+      const product = products.find(
+        p => p.id === item.id
+      );
+
+      if (!product) return "";
+
+
+      const itemTotal =
+        product.price * item.quantity;
+
+
+      total += itemTotal;
+
+
+      return `
+
+        <div class="cart-item">
+
+          <div>
+
+            <strong>
+              ${escapeHTML(product.name)}
+            </strong>
+
+            <br>
+
+            <small>
+              ${item.quantity} عدد
+            </small>
+
+          </div>
+
+          <div>
+            ${formatPrice(itemTotal)}
+          </div>
+
+          <button
+            class="remove"
+            onclick="removeFromCart(${product.id})"
+          >
+            حذف
+          </button>
+
+        </div>
+
+      `;
+
+    }).join("");
+
+
+    document.getElementById("cartTotal")
+      .textContent = formatPrice(total);
+
+  }
+
+
+  function removeFromCart(id) {
+
+    cart = cart.filter(
+      item => item.id !== id
+    );
+
+    saveCart();
+
+    updateCartCount();
+
+    renderCart();
+
+  }
+
+
+  function checkout() {
+
+    if (cart.length === 0) {
+
+      alert("سبد خرید شما خالی است.");
+
+      return;
+
+    }
+
+
+    alert(
+      "سفارش شما آماده ثبت است.\n" +
+      "برای اتصال به پرداخت آنلاین باید درگاه پرداخت به سایت اضافه شود."
+    );
+
+  }
+
+
+  /* ---------------------------
+     ADMIN
+  ---------------------------- */
+
+  function openAdmin() {
+
+    document
+      .getElementById("adminModal")
+      .classList.add("active");
+
+  }
+
+
+  function closeAdmin() {
+
+    document
+      .getElementById("adminModal")
+      .classList.remove("active");
+
+  }
+
+
+  function addProduct(event) {
+
+    event.preventDefault();
+
+
+    const name =
+      document.getElementById("productName").value.trim();
+
+    const price =
+      Number(document.getElementById("productPrice").value);
+
+    const image =
+      document.getElementById("productImage").value.trim();
+
+    const description =
+      document.getElementById("productDescription").value.trim();
+
+
+    if (!name || !price || !description) {
+
+      alert("لطفاً اطلاعات محصول را کامل کنید.");
+
+      return;
+
+    }
+
+
+    const newProduct = {
+
+      id: Date.now(),
+
+      name: name,
+
+      price: price,
+
+      image: image,
+
+      description: description
+
+    };
+
+
+    products.unshift(newProduct);
+
+    saveProducts();
+
+    renderProducts();
+
+    closeAdmin();
+
+
+    document.querySelector(".admin-form").reset();
+
+
+    alert("محصول با موفقیت اضافه شد ✅");
+
+  }
+
+
+  /* ---------------------------
+     NAVIGATION
+  ---------------------------- */
+
+  function scrollToSection(id) {
+
+    document
+      .getElementById(id)
+      .scrollIntoView({
+        behavior: "smooth"
+      });
+
+  }
+
+
+  /* ---------------------------
+     SECURITY
+  ---------------------------- */
+
+  function escapeHTML(value) {
+
+    return String(value)
+
+      .replaceAll("&", "&amp;")
+
+      .replaceAll("<", "&lt;")
+
+      .replaceAll(">", "&gt;")
+
+      .replaceAll('"', "&quot;")
+
+      .replaceAll("'", "&#039;");
+
+  }
+
+
+  /* ---------------------------
+     CLOSE MODALS
+  ---------------------------- */
+
+  document
+    .getElementById("cartModal")
+    .addEventListener("click", function(e) {
+
+      if (e.target === this) {
+        closeCart();
+      }
+
+    });
+
+
+  document
+    .getElementById("adminModal")
+    .addEventListener("click", function(e) {
+
+      if (e.target === this) {
+        closeAdmin();
+      }
+
+    });
+
+
+  /* ---------------------------
+     START
+  ---------------------------- */
+
+  renderProducts();
+
+  updateCartCount();
+
+</script>
+
+</body>
+</html>
